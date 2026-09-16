@@ -22,6 +22,12 @@ export default async function DashboardPage() {
         >
           Мои персонажи
         </Link>
+        <Link
+          href="/digital-twin"
+          className="rounded-md border border-brand px-4 py-2 text-sm font-medium text-brand hover:bg-brand hover:text-white"
+        >
+          Цифровой образ
+        </Link>
       </div>
 
       <h2 className="mt-10 text-lg font-semibold">Тарифы</h2>

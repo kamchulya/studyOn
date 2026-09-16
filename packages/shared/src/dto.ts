@@ -88,3 +88,35 @@ export interface UpdateNicheDto {
   nicheSubcategory?: string;
   nicheCustomText?: string;
 }
+
+export interface DigitalTwinDto {
+  id: string;
+  userId: string;
+  consentGivenAt: string;
+  sourcePhotoUrls: string[];
+  sourceVoiceUrl: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type GenerationJobType = "PHOTO" | "VIDEO";
+export type GenerationJobStatus = "PENDING" | "PROCESSING" | "READY" | "FAILED";
+
+export interface GenerationJobDto {
+  id: string;
+  userId: string;
+  digitalTwinId: string;
+  type: GenerationJobType;
+  status: GenerationJobStatus;
+  prompt: string;
+  resultUrl: string | null;
+  errorMessage: string | null;
+  externalJobId: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface GenerateRequestDto {
+  type: GenerationJobType;
+  prompt: string;
+}

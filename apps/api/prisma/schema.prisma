@@ -31,6 +31,18 @@ enum CharacterStatus {
   READY
 }
 
+enum GenerationType {
+  PHOTO
+  VIDEO
+}
+
+enum GenerationStatus {
+  PENDING
+  PROCESSING
+  READY
+  FAILED
+}
+
 model User {
   id            String   @id @default(uuid())
   email         String   @unique
@@ -39,9 +51,11 @@ model User {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  subscriptions Subscription[]
-  tokenLedger   TokenLedgerEntry[]
-  characters    Character[]
+  subscriptions   Subscription[]
+  tokenLedger     TokenLedgerEntry[]
+  characters      Character[]
+  digitalTwin     DigitalTwin?
+  generationJobs  GenerationJob[]
 }
 
 model Subscription {
@@ -97,6 +111,37 @@ model Character {
 
   createdAt        DateTime        @default(now())
   updatedAt        DateTime        @updatedAt
+
+  @@index([userId])
+}
+
+model DigitalTwin {
+  id              String   @id @default(uuid())
+  userId          String   @unique
+  user            User     @relation(fields: [userId], references: [id])
+  consentGivenAt  DateTime
+  sourcePhotoUrls String[]
+  sourceVoiceUrl  String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  generationJobs  GenerationJob[]
+}
+
+model GenerationJob {
+  id            String           @id @default(uuid())
+  userId        String
+  user          User             @relation(fields: [userId], references: [id])
+  digitalTwinId String
+  digitalTwin   DigitalTwin      @relation(fields: [digitalTwinId], references: [id])
+  type          GenerationType
+  status        GenerationStatus @default(PENDING)
+  prompt        String
+  resultUrl     String?
+  errorMessage  String?
+  externalJobId String?
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
 
   @@index([userId])
 }
