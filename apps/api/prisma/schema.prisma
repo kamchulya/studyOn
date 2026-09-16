@@ -21,6 +21,16 @@ enum SubscriptionStatus {
   CANCELLED
 }
 
+enum VoiceMode {
+  LIBRARY
+  CUSTOM_PROMPT
+}
+
+enum CharacterStatus {
+  DRAFT
+  READY
+}
+
 model User {
   id            String   @id @default(uuid())
   email         String   @unique
@@ -31,6 +41,7 @@ model User {
 
   subscriptions Subscription[]
   tokenLedger   TokenLedgerEntry[]
+  characters    Character[]
 }
 
 model Subscription {
@@ -55,6 +66,37 @@ model TokenLedgerEntry {
   reason    String
   refId     String?
   createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+model Character {
+  id               String          @id @default(uuid())
+  userId           String
+  user             User            @relation(fields: [userId], references: [id])
+  name             String
+  status           CharacterStatus @default(DRAFT)
+
+  bodyType         String?
+  hairColor        String?
+  hairLength       String?
+  eyeColor         String?
+  noseType         String?
+  lipsType         String?
+  facialHair       String?
+  clothingStyle    String?
+  previewImageUrl  String?
+
+  voiceMode        VoiceMode?
+  voiceId          String?
+  voicePrompt      String?
+
+  nicheCategory    String?
+  nicheSubcategory String?
+  nicheCustomText  String?
+
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
 
   @@index([userId])
 }

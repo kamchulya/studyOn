@@ -1,5 +1,8 @@
 import { PlanCode } from "./plans";
 
+export type VoiceMode = "LIBRARY" | "CUSTOM_PROMPT";
+export type CharacterStatus = "DRAFT" | "READY";
+
 export interface RegisterDto {
   email: string;
   password: string;
@@ -30,4 +33,58 @@ export interface CreateSubscriptionDto {
 export interface CreateSubscriptionResponseDto {
   subscriptionId: string;
   paymentUrl: string;
+}
+
+export interface CharacterDto {
+  id: string;
+  name: string;
+  status: CharacterStatus;
+
+  bodyType: string | null;
+  hairColor: string | null;
+  hairLength: string | null;
+  eyeColor: string | null;
+  noseType: string | null;
+  lipsType: string | null;
+  facialHair: string | null;
+  clothingStyle: string | null;
+  previewImageUrl: string | null;
+
+  voiceMode: VoiceMode | null;
+  voiceId: string | null;
+  voicePrompt: string | null;
+
+  nicheCategory: string | null;
+  nicheSubcategory: string | null;
+  nicheCustomText: string | null;
+
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CreateCharacterDto {
+  name: string;
+}
+
+export interface UpdateAppearanceDto {
+  bodyType: string;
+  hairColor: string;
+  hairLength: string;
+  eyeColor: string;
+  noseType?: string;
+  lipsType?: string;
+  facialHair?: string;
+  clothingStyle: string;
+}
+
+export interface UpdateVoiceDto {
+  voiceMode: VoiceMode;
+  voiceId?: string;
+  voicePrompt?: string;
+}
+
+export interface UpdateNicheDto {
+  nicheCategory: string;
+  nicheSubcategory?: string;
+  nicheCustomText?: string;
 }
