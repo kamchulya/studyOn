@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
+import { Playfair_Display } from "next/font/google";
 import "./globals.css";
+
+const displayFont = Playfair_Display({
+  subsets: ["latin", "cyrillic"],
+  style: ["normal", "italic"],
+  variable: "--font-display",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "StudyOn — AI-контент для тренеров и коучей",
@@ -9,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ru">
+    <html lang="ru" className={displayFont.variable}>
       <body>{children}</body>
     </html>
   );

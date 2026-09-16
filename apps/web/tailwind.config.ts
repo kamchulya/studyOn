@@ -11,6 +11,9 @@ const config: Config = {
           dark: "#0f172a",
         },
       },
+      fontFamily: {
+        display: ["var(--font-display)", "serif"],
+      },
     },
   },
   plugins: [],

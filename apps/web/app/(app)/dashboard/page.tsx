@@ -6,7 +6,7 @@ export default async function DashboardPage() {
 
   return (
     <main className="mx-auto max-w-5xl px-6 py-16">
-      <h1 className="text-2xl font-semibold text-slate-900">Привет, {user.email}</h1>
+      <h1 className="font-display text-2xl text-slate-900">Привет, {user.email}</h1>
       <div className="mt-4 flex flex-wrap items-center gap-8 text-slate-600">
         <p>
           Баланс токенов: <span className="font-semibold text-slate-900">{user.tokensBalance}</span>
