@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { requireUser } from "@/lib/auth";
 import { getDigitalTwin } from "@/lib/digitalTwin";
 import { apiFetch } from "@/lib/api";
@@ -15,18 +14,18 @@ async function getJobs(): Promise<GenerationJobDto[]> {
   return res.json();
 }
 
-export default async function DigitalTwinPage() {
+export default async function DigitalTwinPage({
+  searchParams,
+}: {
+  searchParams: { type?: string };
+}) {
   await requireUser();
   const twin = await getDigitalTwin();
+  const initialType = searchParams.type === "video" ? "VIDEO" : "PHOTO";
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-16">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">Цифровой образ</h1>
-        <Link href="/dashboard" className="text-sm text-slate-400 hover:text-white">
-          ← Дашборд
-        </Link>
-      </div>
+      <h1 className="text-2xl font-semibold text-slate-900">Цифровой образ</h1>
 
       {!twin ? (
         <div className="mt-8">
@@ -41,7 +40,7 @@ export default async function DigitalTwinPage() {
             ))}
           </div>
           <div className="mt-8">
-            <GenerationPanel initialJobs={await getJobs()} />
+            <GenerationPanel initialJobs={await getJobs()} initialType={initialType} />
           </div>
         </div>
       )}

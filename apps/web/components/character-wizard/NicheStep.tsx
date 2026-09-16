@@ -53,17 +53,17 @@ export function NicheStep({
 
   return (
     <div>
-      <h2 className="text-lg font-semibold">Шаг 3 — Ниша</h2>
+      <h2 className="text-lg font-semibold text-slate-900">Шаг 3 — Ниша</h2>
 
       <div className="mt-4">
-        <label className="block text-sm text-slate-400">Категория</label>
+        <label className="block text-sm text-slate-500">Категория</label>
         <select
           value={category}
           onChange={(e) => {
             setCategory(e.target.value);
             setSubcategory("");
           }}
-          className="mt-1 w-full rounded-md border border-slate-700 bg-slate-900 px-3 py-2 text-white"
+          className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900"
         >
           <option value="" disabled>
             Выберите…
@@ -78,11 +78,11 @@ export function NicheStep({
 
       {selectedCategory && selectedCategory.subcategories.length > 0 && (
         <div className="mt-4">
-          <label className="block text-sm text-slate-400">Под-специализация (необязательно)</label>
+          <label className="block text-sm text-slate-500">Под-специализация (необязательно)</label>
           <select
             value={subcategory}
             onChange={(e) => setSubcategory(e.target.value)}
-            className="mt-1 w-full rounded-md border border-slate-700 bg-slate-900 px-3 py-2 text-white"
+            className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900"
           >
             <option value="">Не выбрано</option>
             {selectedCategory.subcategories.map((s) => (
@@ -95,7 +95,7 @@ export function NicheStep({
       )}
 
       <div className="mt-4">
-        <label className="block text-sm text-slate-400" htmlFor="niche-custom">
+        <label className="block text-sm text-slate-500" htmlFor="niche-custom">
           Своя ниша текстом (необязательно)
         </label>
         <input
@@ -103,18 +103,18 @@ export function NicheStep({
           value={customText}
           onChange={(e) => setCustomText(e.target.value)}
           maxLength={300}
-          className="mt-1 w-full rounded-md border border-slate-700 bg-slate-900 px-3 py-2 text-white"
+          className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900"
           placeholder="Например: женский фитнес после 40"
         />
       </div>
 
-      {error && <p className="mt-3 text-sm text-red-400">{error}</p>}
+      {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
 
       <div className="mt-6 flex gap-3">
         <button
           type="button"
           onClick={onBack}
-          className="rounded-md border border-slate-700 px-4 py-2 text-sm text-slate-300 hover:border-slate-500"
+          className="rounded-md border border-slate-300 px-4 py-2 text-sm text-slate-600 hover:border-slate-400"
         >
           Назад
         </button>

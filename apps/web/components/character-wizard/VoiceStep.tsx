@@ -48,7 +48,7 @@ export function VoiceStep({
 
   return (
     <div>
-      <h2 className="text-lg font-semibold">Шаг 2 — Голос</h2>
+      <h2 className="text-lg font-semibold text-slate-900">Шаг 2 — Голос</h2>
 
       <div className="mt-4 flex gap-4 text-sm">
         <label className="flex items-center gap-2">
@@ -71,7 +71,7 @@ export function VoiceStep({
             <label
               key={v.id}
               className={`cursor-pointer rounded-lg border p-3 ${
-                voiceId === v.id ? "border-brand bg-brand/10" : "border-slate-800 bg-slate-900/60"
+                voiceId === v.id ? "border-brand bg-brand-light" : "border-slate-200 bg-white"
               }`}
             >
               <input
@@ -81,14 +81,14 @@ export function VoiceStep({
                 checked={voiceId === v.id}
                 onChange={() => setVoiceId(v.id)}
               />
-              <p className="font-medium">{v.name}</p>
-              <p className="text-xs text-slate-400">{v.description}</p>
+              <p className="font-medium text-slate-900">{v.name}</p>
+              <p className="text-xs text-slate-500">{v.description}</p>
             </label>
           ))}
         </div>
       ) : (
         <div className="mt-4">
-          <label className="block text-sm text-slate-400" htmlFor="voice-prompt">
+          <label className="block text-sm text-slate-500" htmlFor="voice-prompt">
             Опишите желаемый голос (тембр, темп, характер)
           </label>
           <textarea
@@ -97,7 +97,7 @@ export function VoiceStep({
             onChange={(e) => setVoicePrompt(e.target.value)}
             maxLength={500}
             rows={3}
-            className="mt-1 w-full rounded-md border border-slate-700 bg-slate-900 px-3 py-2 text-white"
+            className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900"
             placeholder="Например: тёплый низкий мужской голос, спокойный темп, лёгкий акцент"
           />
           <p className="mt-1 text-xs text-slate-500">
@@ -106,13 +106,13 @@ export function VoiceStep({
         </div>
       )}
 
-      {error && <p className="mt-3 text-sm text-red-400">{error}</p>}
+      {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
 
       <div className="mt-6 flex gap-3">
         <button
           type="button"
           onClick={onBack}
-          className="rounded-md border border-slate-700 px-4 py-2 text-sm text-slate-300 hover:border-slate-500"
+          className="rounded-md border border-slate-300 px-4 py-2 text-sm text-slate-600 hover:border-slate-400"
         >
           Назад
         </button>

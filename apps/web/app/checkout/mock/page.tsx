@@ -29,9 +29,9 @@ function MockCheckout() {
   }
 
   return (
-    <main className="mx-auto mt-24 max-w-sm rounded-xl border border-slate-800 bg-slate-900/60 p-8 text-center">
-      <h1 className="text-xl font-semibold">Тестовая оплата (Kaspi Pay — заглушка)</h1>
-      <p className="mt-2 text-sm text-slate-400">
+    <main className="mx-auto mt-24 max-w-sm rounded-xl border border-slate-200 bg-white p-8 text-center">
+      <h1 className="text-xl font-semibold text-slate-900">Тестовая оплата (Kaspi Pay — заглушка)</h1>
+      <p className="mt-2 text-sm text-slate-500">
         В проде здесь будет реальный экран Kaspi Pay. Пока используется мок-провайдер для проверки
         сквозного сценария.
       </p>

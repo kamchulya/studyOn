@@ -49,9 +49,9 @@ export function ConsentUploadForm() {
 
   return (
     <form onSubmit={onSubmit} className="max-w-xl space-y-5">
-      <div className="rounded-lg border border-amber-700/50 bg-amber-950/30 p-4 text-sm text-amber-200">
+      <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
         <p className="font-medium">Согласие на обработку биометрии</p>
-        <p className="mt-1 text-amber-200/80">
+        <p className="mt-1 text-amber-800">
           Загружая своё фото и голос, вы подтверждаете, что это именно вы (или у вас есть явное согласие
           человека на фото/голосе), и разрешаете обработку этих данных для генерации фото и видео с вашим
           цифровым образом. Это персональные данные специальной категории — без явного согласия мы их не
@@ -64,27 +64,27 @@ export function ConsentUploadForm() {
       </div>
 
       <div>
-        <label className="block text-sm text-slate-400">Ваши фото (до 3)</label>
+        <label className="block text-sm text-slate-500">Ваши фото (до 3)</label>
         <input
           type="file"
           accept="image/*"
           multiple
           onChange={(e) => setPhotos(e.target.files)}
-          className="mt-1 block w-full text-sm text-slate-300"
+          className="mt-1 block w-full text-sm text-slate-600"
         />
       </div>
 
       <div>
-        <label className="block text-sm text-slate-400">Ваш голос — аудиофайл (необязательно)</label>
+        <label className="block text-sm text-slate-500">Ваш голос — аудиофайл (необязательно)</label>
         <input
           type="file"
           accept="audio/*"
           onChange={(e) => setVoice(e.target.files)}
-          className="mt-1 block w-full text-sm text-slate-300"
+          className="mt-1 block w-full text-sm text-slate-600"
         />
       </div>
 
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {error && <p className="text-sm text-red-600">{error}</p>}
 
       <button
         type="submit"

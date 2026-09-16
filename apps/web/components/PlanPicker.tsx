@@ -34,9 +34,9 @@ export function PlanPicker({ activePlan }: { activePlan: PlanCode | null }) {
       {PLANS.map((plan) => {
         const isActive = plan.code === activePlan;
         return (
-          <div key={plan.code} className="rounded-xl border border-slate-800 bg-slate-900/60 p-5">
-            <h3 className="text-lg font-semibold">{plan.title}</h3>
-            <p className="mt-1 text-2xl font-bold">{kzt.format(plan.priceKztMonthly)} ₸</p>
+          <div key={plan.code} className="rounded-xl border border-slate-200 bg-white p-5">
+            <h3 className="text-lg font-semibold text-slate-900">{plan.title}</h3>
+            <p className="mt-1 text-2xl font-bold text-slate-900">{kzt.format(plan.priceKztMonthly)} ₸</p>
             <button
               onClick={() => subscribe(plan.code)}
               disabled={isActive || loadingPlan !== null}
@@ -47,7 +47,7 @@ export function PlanPicker({ activePlan }: { activePlan: PlanCode | null }) {
           </div>
         );
       })}
-      {error && <p className="col-span-full text-sm text-red-400">{error}</p>}
+      {error && <p className="col-span-full text-sm text-red-600">{error}</p>}
     </div>
   );
 }

@@ -7,10 +7,10 @@ const POLL_INTERVAL_MS = 3000;
 
 function JobResult({ job }: { job: GenerationJobDto }) {
   if (job.status === "PENDING" || job.status === "PROCESSING") {
-    return <p className="text-sm text-slate-400">Генерируем… ({job.status === "PENDING" ? "в очереди" : "в процессе"})</p>;
+    return <p className="text-sm text-slate-500">Генерируем… ({job.status === "PENDING" ? "в очереди" : "в процессе"})</p>;
   }
   if (job.status === "FAILED") {
-    return <p className="text-sm text-red-400">{job.errorMessage ?? "Генерация завершилась ошибкой"}</p>;
+    return <p className="text-sm text-red-600">{job.errorMessage ?? "Генерация завершилась ошибкой"}</p>;
   }
   if (job.resultUrl && job.type === "PHOTO") {
     // eslint-disable-next-line @next/next/no-img-element
@@ -22,8 +22,14 @@ function JobResult({ job }: { job: GenerationJobDto }) {
   return null;
 }
 
-export function GenerationPanel({ initialJobs }: { initialJobs: GenerationJobDto[] }) {
-  const [type, setType] = useState<GenerationJobType>("PHOTO");
+export function GenerationPanel({
+  initialJobs,
+  initialType = "PHOTO",
+}: {
+  initialJobs: GenerationJobDto[];
+  initialType?: GenerationJobType;
+}) {
+  const [type, setType] = useState<GenerationJobType>(initialType);
   const [prompt, setPrompt] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -90,7 +96,7 @@ export function GenerationPanel({ initialJobs }: { initialJobs: GenerationJobDto
         </div>
 
         <div>
-          <label className="block text-sm text-slate-400" htmlFor="gen-prompt">
+          <label className="block text-sm text-slate-500" htmlFor="gen-prompt">
             {type === "PHOTO" ? "Опишите, что нужно изменить" : "Текст, который персонаж скажет"}
           </label>
           <textarea
@@ -105,11 +111,11 @@ export function GenerationPanel({ initialJobs }: { initialJobs: GenerationJobDto
                 ? "Например: деловой костюм, лёгкий макияж, нейтральный фон"
                 : "Например: расскажи, почему автоматизация экономит бизнесу время и деньги"
             }
-            className="mt-1 w-full rounded-md border border-slate-700 bg-slate-900 px-3 py-2 text-white"
+            className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900"
           />
         </div>
 
-        {error && <p className="text-sm text-red-400">{error}</p>}
+        {error && <p className="text-sm text-red-600">{error}</p>}
 
         <button
           type="submit"
@@ -122,9 +128,9 @@ export function GenerationPanel({ initialJobs }: { initialJobs: GenerationJobDto
 
       {jobs.length > 0 && (
         <div className="mt-8 space-y-4">
-          <h3 className="text-sm font-medium text-slate-400">Результаты</h3>
+          <h3 className="text-sm font-medium text-slate-500">Результаты</h3>
           {jobs.map((job) => (
-            <div key={job.id} className="rounded-lg border border-slate-800 bg-slate-900/60 p-4">
+            <div key={job.id} className="rounded-lg border border-slate-200 bg-white p-4">
               <p className="text-xs text-slate-500">
                 {job.type === "PHOTO" ? "Фото" : "Видео"} · {job.prompt}
               </p>

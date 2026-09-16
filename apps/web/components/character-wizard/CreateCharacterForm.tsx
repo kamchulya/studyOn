@@ -33,7 +33,7 @@ export function CreateCharacterForm() {
   return (
     <form onSubmit={onSubmit} className="flex flex-wrap items-end gap-3">
       <div>
-        <label className="block text-sm text-slate-400" htmlFor="character-name">
+        <label className="block text-sm text-slate-500" htmlFor="character-name">
           Имя персонажа
         </label>
         <input
@@ -43,7 +43,7 @@ export function CreateCharacterForm() {
           required
           maxLength={80}
           placeholder="Например, Нурлан"
-          className="mt-1 rounded-md border border-slate-700 bg-slate-900 px-3 py-2 text-white"
+          className="mt-1 rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900"
         />
       </div>
       <button
@@ -53,7 +53,7 @@ export function CreateCharacterForm() {
       >
         {loading ? "Создаём…" : "Создать персонажа"}
       </button>
-      {error && <p className="w-full text-sm text-red-400">{error}</p>}
+      {error && <p className="w-full text-sm text-red-600">{error}</p>}
     </form>
   );
 }

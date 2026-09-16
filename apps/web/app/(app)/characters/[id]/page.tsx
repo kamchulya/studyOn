@@ -16,7 +16,7 @@ export default async function CharacterPage({ params }: { params: { id: string }
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-16">
-      <Link href="/characters" className="text-sm text-slate-400 hover:text-white">
+      <Link href="/characters" className="text-sm text-slate-500 hover:text-slate-900">
         ← Мои персонажи
       </Link>
 
@@ -26,18 +26,18 @@ export default async function CharacterPage({ params }: { params: { id: string }
           <img src={character.previewImageUrl} alt={character.name} className="h-32 w-32 rounded-xl object-cover" />
         )}
         <div>
-          <h1 className="text-2xl font-semibold">{character.name}</h1>
-          <p className="text-sm text-slate-400">{character.status === "READY" ? "Готов" : "Черновик"}</p>
+          <h1 className="text-2xl font-semibold text-slate-900">{character.name}</h1>
+          <p className="text-sm text-slate-500">{character.status === "READY" ? "Готов" : "Черновик"}</p>
         </div>
       </div>
 
-      <dl className="mt-8 grid gap-4 sm:grid-cols-2">
+      <dl className="mt-8 grid gap-4 sm:grid-cols-2 text-slate-900">
         <div>
-          <dt className="text-sm text-slate-400">Голос</dt>
+          <dt className="text-sm text-slate-500">Голос</dt>
           <dd>{voice ? voice.name : character.voicePrompt ? `По описанию: ${character.voicePrompt}` : "—"}</dd>
         </div>
         <div>
-          <dt className="text-sm text-slate-400">Ниша</dt>
+          <dt className="text-sm text-slate-500">Ниша</dt>
           <dd>
             {niche?.label}
             {character.nicheSubcategory ? ` — ${character.nicheSubcategory}` : ""}

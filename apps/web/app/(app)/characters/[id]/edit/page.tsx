@@ -17,7 +17,7 @@ export default async function EditCharacterPage({ params }: { params: { id: stri
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-16">
-      <h1 className="text-2xl font-semibold">Настройка персонажа: {character.name}</h1>
+      <h1 className="text-2xl font-semibold text-slate-900">Настройка персонажа: {character.name}</h1>
       <div className="mt-8">
         <CharacterWizard initialCharacter={character} voices={voices} />
       </div>

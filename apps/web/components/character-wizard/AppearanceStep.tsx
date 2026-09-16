@@ -27,11 +27,11 @@ function Select({
 }) {
   return (
     <div>
-      <label className="block text-sm text-slate-400">{label}</label>
+      <label className="block text-sm text-slate-500">{label}</label>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="mt-1 w-full rounded-md border border-slate-700 bg-slate-900 px-3 py-2 text-white"
+        className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900"
       >
         <option value="" disabled>
           Выберите…
@@ -125,7 +125,7 @@ export function AppearanceStep({
 
   return (
     <div>
-      <h2 className="text-lg font-semibold">Шаг 1 — Внешность</h2>
+      <h2 className="text-lg font-semibold text-slate-900">Шаг 1 — Внешность</h2>
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <Select label="Комплекция" value={form.bodyType} options={BODY_TYPES} onChange={(v) => set("bodyType", v)} />
         <Select label="Цвет волос" value={form.hairColor} options={HAIR_COLORS} onChange={(v) => set("hairColor", v)} />
@@ -162,7 +162,7 @@ export function AppearanceStep({
         </button>
       </div>
 
-      {error && <p className="mt-3 text-sm text-red-400">{error}</p>}
+      {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
 
       <button
         type="button"

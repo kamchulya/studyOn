@@ -34,9 +34,9 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
 
   return (
     <form onSubmit={onSubmit} className="mx-auto mt-16 max-w-sm space-y-4">
-      <h1 className="text-2xl font-semibold">{mode === "login" ? "Вход" : "Регистрация"}</h1>
+      <h1 className="text-2xl font-semibold text-slate-900">{mode === "login" ? "Вход" : "Регистрация"}</h1>
       <div>
-        <label className="block text-sm text-slate-400" htmlFor="email">
+        <label className="block text-sm text-slate-500" htmlFor="email">
           Email
         </label>
         <input
@@ -45,11 +45,11 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="mt-1 w-full rounded-md border border-slate-700 bg-slate-900 px-3 py-2 text-white"
+          className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900"
         />
       </div>
       <div>
-        <label className="block text-sm text-slate-400" htmlFor="password">
+        <label className="block text-sm text-slate-500" htmlFor="password">
           Пароль
         </label>
         <input
@@ -59,10 +59,10 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
           minLength={8}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="mt-1 w-full rounded-md border border-slate-700 bg-slate-900 px-3 py-2 text-white"
+          className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900"
         />
       </div>
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {error && <p className="text-sm text-red-600">{error}</p>}
       <button
         type="submit"
         disabled={loading}

@@ -9,7 +9,7 @@ export default function LandingPage() {
       <header className="flex items-center justify-between pb-16">
         <span className="text-xl font-semibold text-brand">StudyOn</span>
         <nav className="flex gap-4 text-sm">
-          <Link href="/login" className="text-slate-300 hover:text-white">
+          <Link href="/login" className="text-slate-600 hover:text-slate-900">
             Войти
           </Link>
           <Link
@@ -22,10 +22,10 @@ export default function LandingPage() {
       </header>
 
       <section className="pb-20 text-center">
-        <h1 className="mx-auto max-w-3xl text-4xl font-bold leading-tight sm:text-5xl">
+        <h1 className="mx-auto max-w-3xl text-4xl font-bold leading-tight text-slate-900 sm:text-5xl">
           Постоянный поток контента для тренеров, коучей и блогеров — без камеры и монтажёра
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-400">
+        <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-500">
           Соберите своего цифрового аватара один раз — голос, внешность, экспертиза — и получайте
           говорящие видео, фото, карусели и посты под свою нишу каждый день.
         </p>
@@ -41,13 +41,13 @@ export default function LandingPage() {
         {PLANS.map((plan) => (
           <div
             key={plan.code}
-            className="flex flex-col rounded-xl border border-slate-800 bg-slate-900/60 p-6"
+            className="flex flex-col rounded-xl border border-slate-200 bg-white p-6"
           >
-            <h3 className="text-lg font-semibold">{plan.title}</h3>
-            <p className="mt-2 text-3xl font-bold">
-              {kzt.format(plan.priceKztMonthly)} ₸<span className="text-base font-normal text-slate-400">/мес</span>
+            <h3 className="text-lg font-semibold text-slate-900">{plan.title}</h3>
+            <p className="mt-2 text-3xl font-bold text-slate-900">
+              {kzt.format(plan.priceKztMonthly)} ₸<span className="text-base font-normal text-slate-500">/мес</span>
             </p>
-            <ul className="mt-4 flex-1 space-y-2 text-sm text-slate-400">
+            <ul className="mt-4 flex-1 space-y-2 text-sm text-slate-500">
               <li>{plan.tokensPerMonth} токенов/мес</li>
               <li>{plan.maxCharacters} {plan.maxCharacters === 1 ? "персонаж" : "персонажа"}</li>
               <li>{plan.video30sPerMonth} видео по 30с</li>

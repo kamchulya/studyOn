@@ -10,3 +10,4 @@ build/
 coverage/
 apps/api/uploads/*
 !apps/api/uploads/.gitkeep
+.claude/settings.local.json
