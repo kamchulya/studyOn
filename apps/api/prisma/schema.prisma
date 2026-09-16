@@ -34,6 +34,7 @@ enum CharacterStatus {
 enum GenerationType {
   PHOTO
   VIDEO
+  TEXT
 }
 
 enum GenerationStatus {
@@ -132,14 +133,16 @@ model GenerationJob {
   id            String           @id @default(uuid())
   userId        String
   user          User             @relation(fields: [userId], references: [id])
-  digitalTwinId String
-  digitalTwin   DigitalTwin      @relation(fields: [digitalTwinId], references: [id])
+  digitalTwinId String?
+  digitalTwin   DigitalTwin?     @relation(fields: [digitalTwinId], references: [id])
   type          GenerationType
   status        GenerationStatus @default(PENDING)
   prompt        String
   resultUrl     String?
+  resultText    String?
   errorMessage  String?
   externalJobId String?
+  scheduledFor  DateTime?
   createdAt     DateTime         @default(now())
   updatedAt     DateTime         @updatedAt
 

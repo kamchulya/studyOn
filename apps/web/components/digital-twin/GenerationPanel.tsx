@@ -2,32 +2,24 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { GenerationJobDto, GenerationJobType } from "@studyon/shared";
+import { JobResult } from "@/components/content/JobResult";
 
 const POLL_INTERVAL_MS = 3000;
 
-function JobResult({ job }: { job: GenerationJobDto }) {
-  if (job.status === "PENDING" || job.status === "PROCESSING") {
-    return <p className="text-sm text-slate-500">Генерируем… ({job.status === "PENDING" ? "в очереди" : "в процессе"})</p>;
-  }
-  if (job.status === "FAILED") {
-    return <p className="text-sm text-red-600">{job.errorMessage ?? "Генерация завершилась ошибкой"}</p>;
-  }
-  if (job.resultUrl && job.type === "PHOTO") {
-    // eslint-disable-next-line @next/next/no-img-element
-    return <img src={job.resultUrl} alt="Результат генерации" className="mt-2 max-h-96 rounded-lg" />;
-  }
-  if (job.resultUrl && job.type === "VIDEO") {
-    return <video src={job.resultUrl} controls className="mt-2 max-h-96 rounded-lg" />;
-  }
-  return null;
-}
+const TYPE_LABELS: Record<GenerationJobType, string> = {
+  PHOTO: "Фото",
+  VIDEO: "Видео",
+  TEXT: "Текст",
+};
 
 export function GenerationPanel({
   initialJobs,
   initialType = "PHOTO",
+  types = ["PHOTO", "VIDEO"],
 }: {
   initialJobs: GenerationJobDto[];
   initialType?: GenerationJobType;
+  types?: GenerationJobType[];
 }) {
   const [type, setType] = useState<GenerationJobType>(initialType);
   const [prompt, setPrompt] = useState("");
@@ -84,20 +76,24 @@ export function GenerationPanel({
   return (
     <div>
       <form onSubmit={onSubmit} className="max-w-xl space-y-4">
-        <div className="flex gap-4 text-sm">
-          <label className="flex items-center gap-2">
-            <input type="radio" checked={type === "PHOTO"} onChange={() => setType("PHOTO")} />
-            Фото
-          </label>
-          <label className="flex items-center gap-2">
-            <input type="radio" checked={type === "VIDEO"} onChange={() => setType("VIDEO")} />
-            Видео
-          </label>
-        </div>
+        {types.length > 1 && (
+          <div className="flex gap-4 text-sm">
+            {types.map((t) => (
+              <label key={t} className="flex items-center gap-2">
+                <input type="radio" checked={type === t} onChange={() => setType(t)} />
+                {TYPE_LABELS[t]}
+              </label>
+            ))}
+          </div>
+        )}
 
         <div>
           <label className="block text-sm text-slate-500" htmlFor="gen-prompt">
-            {type === "PHOTO" ? "Опишите, что нужно изменить" : "Текст, который персонаж скажет"}
+            {type === "PHOTO"
+              ? "Опишите, что нужно изменить"
+              : type === "VIDEO"
+                ? "Текст, который персонаж скажет"
+                : "Тема поста"}
           </label>
           <textarea
             id="gen-prompt"
@@ -109,7 +105,9 @@ export function GenerationPanel({
             placeholder={
               type === "PHOTO"
                 ? "Например: деловой костюм, лёгкий макияж, нейтральный фон"
-                : "Например: расскажи, почему автоматизация экономит бизнесу время и деньги"
+                : type === "VIDEO"
+                  ? "Например: расскажи, почему автоматизация экономит бизнесу время и деньги"
+                  : "Например: 3 привычки, которые помогают держать форму при плотном графике"
             }
             className="mt-1 w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-slate-900"
           />
@@ -132,7 +130,7 @@ export function GenerationPanel({
           {jobs.map((job) => (
             <div key={job.id} className="rounded-lg border border-slate-200 bg-white p-4">
               <p className="text-xs text-slate-500">
-                {job.type === "PHOTO" ? "Фото" : "Видео"} · {job.prompt}
+                {TYPE_LABELS[job.type]} · {job.prompt}
               </p>
               <JobResult job={job} />
             </div>

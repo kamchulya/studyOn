@@ -1,8 +1,8 @@
 import { IsIn, IsNotEmpty, IsString, MaxLength } from "class-validator";
 
 export class GenerateRequestDto {
-  @IsIn(["PHOTO", "VIDEO"])
-  type!: "PHOTO" | "VIDEO";
+  @IsIn(["PHOTO", "VIDEO", "TEXT"])
+  type!: "PHOTO" | "VIDEO" | "TEXT";
 
   @IsString()
   @IsNotEmpty()

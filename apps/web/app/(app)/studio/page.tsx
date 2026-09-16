@@ -34,8 +34,8 @@ const FORMATS = [
     title: "Текст",
     description: "От короткого поста до лонгрида, с картинкой или без",
     price: "от 1 токена",
-    href: undefined,
-    ready: false,
+    href: "/studio/text",
+    ready: true,
   },
 ];
 

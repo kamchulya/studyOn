@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   Inject,
   Param,
@@ -19,6 +20,7 @@ import { JwtPayload } from "../auth/jwt.strategy";
 import { DigitalTwinService } from "./digital-twin.service";
 import { GenerationService } from "./generation.service";
 import { GenerateRequestDto } from "./dto/generate.dto";
+import { ScheduleDto } from "./dto/schedule.dto";
 import { STORAGE_PROVIDER, StorageProvider } from "../storage/storage-provider.interface";
 
 type UploadedFilesMap = { photos?: Express.Multer.File[]; voice?: Express.Multer.File[] };
@@ -82,8 +84,23 @@ export class DigitalTwinController {
     return this.generation.list(user.sub);
   }
 
+  @Get("generation-jobs/scheduled")
+  listScheduled(@CurrentUser() user: JwtPayload) {
+    return this.generation.listScheduled(user.sub);
+  }
+
   @Get("generation-jobs/:id")
   status(@CurrentUser() user: JwtPayload, @Param("id") id: string) {
     return this.generation.getStatus(user.sub, id);
+  }
+
+  @Post("generation-jobs/:id/schedule")
+  schedule(@CurrentUser() user: JwtPayload, @Param("id") id: string, @Body() dto: ScheduleDto) {
+    return this.generation.schedule(user.sub, id, dto.scheduledFor);
+  }
+
+  @Delete("generation-jobs/:id/schedule")
+  unschedule(@CurrentUser() user: JwtPayload, @Param("id") id: string) {
+    return this.generation.unschedule(user.sub, id);
   }
 }

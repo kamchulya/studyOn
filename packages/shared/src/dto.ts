@@ -99,19 +99,21 @@ export interface DigitalTwinDto {
   updatedAt: string;
 }
 
-export type GenerationJobType = "PHOTO" | "VIDEO";
+export type GenerationJobType = "PHOTO" | "VIDEO" | "TEXT";
 export type GenerationJobStatus = "PENDING" | "PROCESSING" | "READY" | "FAILED";
 
 export interface GenerationJobDto {
   id: string;
   userId: string;
-  digitalTwinId: string;
+  digitalTwinId: string | null;
   type: GenerationJobType;
   status: GenerationJobStatus;
   prompt: string;
   resultUrl: string | null;
+  resultText: string | null;
   errorMessage: string | null;
   externalJobId: string | null;
+  scheduledFor: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -119,4 +121,8 @@ export interface GenerationJobDto {
 export interface GenerateRequestDto {
   type: GenerationJobType;
   prompt: string;
+}
+
+export interface ScheduleRequestDto {
+  scheduledFor: string;
 }

@@ -10,6 +10,9 @@ import { FluxImageEditProvider } from "./providers/flux-image-edit.provider";
 import { VIDEO_AVATAR_PROVIDER } from "./providers/video-avatar-provider.interface";
 import { MockVideoAvatarProvider } from "./providers/mock-video-avatar.provider";
 import { HeygenVideoAvatarProvider } from "./providers/heygen-video-avatar.provider";
+import { TEXT_PROVIDER } from "./providers/text-provider.interface";
+import { MockTextProvider } from "./providers/mock-text.provider";
+import { OpenAiTextProvider } from "./providers/openai-text.provider";
 
 @Module({
   imports: [ConfigModule, StorageModule],
@@ -21,6 +24,8 @@ import { HeygenVideoAvatarProvider } from "./providers/heygen-video-avatar.provi
     FluxImageEditProvider,
     MockVideoAvatarProvider,
     HeygenVideoAvatarProvider,
+    MockTextProvider,
+    OpenAiTextProvider,
     {
       provide: IMAGE_EDIT_PROVIDER,
       inject: [ConfigService, MockImageEditProvider, FluxImageEditProvider],
@@ -32,6 +37,12 @@ import { HeygenVideoAvatarProvider } from "./providers/heygen-video-avatar.provi
       inject: [ConfigService, MockVideoAvatarProvider, HeygenVideoAvatarProvider],
       useFactory: (config: ConfigService, mock: MockVideoAvatarProvider, heygen: HeygenVideoAvatarProvider) =>
         config.get<string>("VIDEO_AVATAR_PROVIDER") === "heygen" ? heygen : mock,
+    },
+    {
+      provide: TEXT_PROVIDER,
+      inject: [ConfigService, MockTextProvider, OpenAiTextProvider],
+      useFactory: (config: ConfigService, mock: MockTextProvider, openai: OpenAiTextProvider) =>
+        config.get<string>("LLM_PROVIDER") === "openai" ? openai : mock,
     },
   ],
 })

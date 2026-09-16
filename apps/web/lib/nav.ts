@@ -22,8 +22,8 @@ export const NAV_SECTIONS: NavSection[] = [
     title: "Контент",
     items: [
       { label: "Создать контент", href: "/studio", status: "ready" },
-      { label: "Планер", status: "soon" },
-      { label: "Мой контент", status: "soon" },
+      { label: "Планер", href: "/planner", status: "ready" },
+      { label: "Мой контент", href: "/content", status: "ready" },
     ],
   },
   {
