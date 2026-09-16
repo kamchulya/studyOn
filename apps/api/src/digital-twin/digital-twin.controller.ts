@@ -6,11 +6,13 @@ import {
   Inject,
   Param,
   Post,
+  Res,
   UploadedFiles,
   UseGuards,
   UseInterceptors,
 } from "@nestjs/common";
 import { FileFieldsInterceptor } from "@nestjs/platform-express";
+import type { Response } from "express";
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 import { CurrentUser } from "../auth/current-user.decorator";
 import { JwtPayload } from "../auth/jwt.strategy";
@@ -31,8 +33,13 @@ export class DigitalTwinController {
   ) {}
 
   @Get("digital-twin")
-  get(@CurrentUser() user: JwtPayload) {
-    return this.digitalTwin.getByUser(user.sub);
+  async get(@CurrentUser() user: JwtPayload, @Res({ passthrough: true }) res: Response) {
+    // Nest sends an empty body (no Content-Type) for a bare `null`/`undefined`
+    // return value instead of the JSON text "null", which breaks callers that
+    // always call res.json() on a 200. Serialize explicitly so the body is
+    // always valid JSON, even when the user has no digital twin yet.
+    const twin = await this.digitalTwin.getByUser(user.sub);
+    res.json(twin);
   }
 
   @Post("digital-twin")
